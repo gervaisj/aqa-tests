@@ -43,5 +43,5 @@ def run_grinder(Map<String, Object> map) {
     println e
   }
 
-  build job: Grinder, parameters: childParams, propagate: false
+  build job: "Grinder", parameters: childParams, propagate: false
 }
