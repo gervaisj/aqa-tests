@@ -39,7 +39,7 @@ def run_grinder(Map<String, Object> map) {
     }
   }
 
-  for (e in childparams) {
+  for (e in childParams) {
     println e
   }
 
