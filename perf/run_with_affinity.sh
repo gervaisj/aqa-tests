@@ -43,8 +43,13 @@ while [ -n "$1" ]; do
 	esac
 	shift
 done
-	
-. "${TEST_ROOT}/perf/affinity.sh" > /dev/null 2>&1
+
+echo "Parsed args"
+echo "${TEST_ROOT}"
+echo "Parsed args"
+echo "${EXEC_CMD}"
+
+. "${TEST_ROOT}/perf/affinity.sh"
 setServerDBLoadAffinities --server-physcpu-num $SERVER_PHYSCPU_NUM --smt $SMT
 
 if [ -z "${SERVER_AFFINITY_CMD}" ]; then
