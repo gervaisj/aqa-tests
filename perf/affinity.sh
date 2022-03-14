@@ -464,6 +464,10 @@ function __init_platform() {
 		__AFFINITY_CPU_ARCH=$(uname -m)
 		__AFFINITY_PLATFORM="${__AFFINITY_UNAME}-${__AFFINITY_CPU_ARCH}"
 		;;
+	SunOS)
+		__AFFINITY_CPU_ARCH=$(uname -m)
+		__AFFINITY_PLATFORM="${__AFFINITY_UNAME}-${__AFFINITY_CPU_ARCH}"
+		;;
 	OS/390*)
 		__AFFINITY_CPU_ARCH=$(uname -m)
 		__AFFINITY_PLATFORM="${__AFFINITY_UNAME}-${__AFFINITY_CPU_ARCH}"
@@ -494,6 +498,9 @@ function __init_cpus() {
 		;;
 	AIX)
 		__init_cpus_aix
+		;;
+	SunOS)
+		__init_cpus_sunos
 		;;
 	Windows)
 		__init_cpus_windows
@@ -655,6 +662,17 @@ function __init_cpus_zos() {
 function __init_cpus_macos() {
 	__AFFINITY_THREAD_COUNT=$(sysctl -n machdep.cpu.thread_count)
 	__AFFINITY_CORES_PER_SOCKET=$(sysctl -n machdep.cpu.core_count)
+
+	__AFFINITY_THREAD_PER_CORE=$(expr $__AFFINITY_THREAD_COUNT / $__AFFINITY_CORES_PER_SOCKET)
+
+	__AFFINITY_NUMA_NODE_ARR=(0-$(expr $__AFFINITY_THREAD_COUNT - 1))
+	__AFFINITY_NUMA_NODES=1
+}
+
+# initializes cpu values for SunOS platform
+function __init_cpus_sunos() {
+	__AFFINITY_THREAD_COUNT=4
+	__AFFINITY_CORES_PER_SOCKET=4
 
 	__AFFINITY_THREAD_PER_CORE=$(expr $__AFFINITY_THREAD_COUNT / $__AFFINITY_CORES_PER_SOCKET)
 
