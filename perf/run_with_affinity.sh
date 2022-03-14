@@ -45,7 +45,7 @@ while [ -n "$1" ]; do
 done
 	
 . "${TEST_ROOT}/perf/affinity.sh" > /dev/null 2>&1
-setServerDBLoadAffinities --server-physcpu-num $SERVER_PHYSCPU_NUM --smt $SMT > /dev/null 2>&1
+setServerDBLoadAffinities --server-physcpu-num $SERVER_PHYSCPU_NUM --smt $SMT
 
 if [ -z "${SERVER_AFFINITY_CMD}" ]; then
     echo "Warning!!! Affinity is NOT set. Affinity tool may NOT be installed/supported."
