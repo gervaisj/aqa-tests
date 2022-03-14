@@ -50,6 +50,7 @@ echo "Parsed args"
 echo "${EXEC_CMD}"
 echo "$(uname)"
 echo "$(uname -m)"
+echo "$(isainfo -kv)"
 
 . "${TEST_ROOT}/perf/affinity.sh"
 setServerDBLoadAffinities --server-physcpu-num $SERVER_PHYSCPU_NUM --smt $SMT
