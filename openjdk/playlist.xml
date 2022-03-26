@@ -899,11 +899,6 @@
 	</test>
 	<test>
 		<testCaseName>jdk_swing</testCaseName>
-		<disables>
-			<disable>
-				<comment>https://github.com/adoptium/aqa-tests/issues/49</comment>
-			</disable>
-		</disables>
 		<variations>
 			<variation>Mode150</variation>
 			<variation>Mode650</variation>
