@@ -53,7 +53,9 @@ def launch_grinders(List<Exclusion> json) {
   }
 
   Map<String, Closure> test_jobs = entries.collectEntries { exclKey, issue ->
-    [exclKey, run_grinder(issue)]
+    def childParams = issue.collect { k, v -> string(name: k, value: v) }
+    def job = build job: "Grinder", parameters: childParams, propagate: true
+    [exclKey, job]
   }
 
   parallel test_jobs
