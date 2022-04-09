@@ -1,6 +1,17 @@
 #!groovy
 
-List<Map<String, Object>> json = []
+interface Exclusion extends Map<String, String> {}
+
+List<Exclusion> json = []
+
+/**This runs when we have found a job w/ git_issue_status = closed.
+ Collects all parameters and runs grinder*/
+def run_grinder(Exclusion map) {
+  def childParams = map.collect { k, v -> string(name: k, value: v) }
+  return {
+    build job: "Grinder", parameters: childParams, propagate: true
+  }
+}
 
 node(params.LABEL) {
   checkout scm
@@ -12,24 +23,19 @@ node(params.LABEL) {
 //  }
   stage('readJSON') {
     def json_path = "${WORKSPACE}/aqa-tests/buildenv/jenkins/sample_output.json"
-    json = readJSON(file: json_path) as List<Map<String, String>>
+    json = readJSON(file: json_path) as List<Exclusion>
   }
 }
 
-stage('Launch Grinder Jobs')
-        {
-          launch_grinders(json)
-        }
+stage('Launch Grinder Jobs') {
+  launch_grinders(json)
+}
 
-interface Exclusion extends Map<String, String> {}
-
-/**
- Get the parameters specified as a string list.
+/**Get the parameters specified as a string list.
  Get each of the key-value pairs for each json value.
  If the issue for a job is closed, and JDK_VERSION and
  JDK_IMPL match the parameters specified,
- run grinder on it. Otherwise ignore it
- */
+ run grinder on it. Otherwise ignore it*/
 def launch_grinders(List<Exclusion> json) {
 
   def jdk_ver = params.JDK_VERSION.split(',')
@@ -53,10 +59,8 @@ def launch_grinders(List<Exclusion> json) {
   parallel test_jobs
 }
 
-/**
- Consumes git token and triggers issue_tracker
- Generates output.json
- */
+/**Consumes git token and triggers issue_tracker
+ Generates output.json*/
 def trigger_issue_status() {
 
   if (params.AQA_ISSUE_TRACKER_CREDENTIAL_ID) {
@@ -65,16 +69,5 @@ def trigger_issue_status() {
         export AQA_ISSUE_TRACKER_GITHUB_TOKEN=${TOKEN}
         python3 ${WORKSPACE}/aqa-tests/scripts/disabled_tests/issue_status.py --infile ${WORKSPACE}/aqa-tests/scripts/disabled_tests/problem_list.json > ${WORKSPACE}/aqa-tests/scripts/disabled_tests/output.json"""
     }
-  }
-}
-
-/**
- This runs when we have found a job w/ git_issue_status = closed.
- Collects all parameters and runs grinder
- */
-def run_grinder(Exclusion map) {
-  def childParams = map.collect { k, v -> string(name: k, value: v) }
-  return {
-    build job: "Grinder", parameters: childParams, propagate: true
   }
 }
