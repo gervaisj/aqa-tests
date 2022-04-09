@@ -1,0 +1,74 @@
+[
+  {
+    "JDK_VERSION": "17",
+    "JDK_IMPL": "openj9",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "java/lang/Class/forName/NonJavaNames.sh",
+    "PLATFORM": "all",
+    "ISSUE_TRACKER": "https://github.com/eclipse-openj9/openj9/issues/5225",
+    "ISSUE_TRACKER_STATUS": "closed"
+  },
+  {
+    "JDK_VERSION": "17",
+    "JDK_IMPL": "openj9",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "java/lang/ClassLoader/EndorsedDirs.java",
+    "PLATFORM": "all",
+    "ISSUE_TRACKER": "https://github.com/eclipse-openj9/openj9/issues/3055",
+    "ISSUE_TRACKER_STATUS": "closed"
+  },
+  {
+    "JDK_VERSION": "17",
+    "JDK_IMPL": "openj9",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "java/lang/ClassLoader/ExtDirs.java",
+    "PLATFORM": "all",
+    "ISSUE_TRACKER": "https://github.com/eclipse-openj9/openj9/issues/3055",
+    "ISSUE_TRACKER_STATUS": "closed"
+  },
+  {
+    "JDK_VERSION": "17",
+    "JDK_IMPL": "hotspot",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "jdk/internal/loader/NativeLibraries/Main.java",
+    "PLATFORM": "all",
+    "ISSUE_TRACKER": "https://github.com/adoptium/aqa-tests/issues/1920",
+    "ISSUE_TRACKER_STATUS": "closed"
+  },
+  {
+    "JDK_VERSION": "17",
+    "JDK_IMPL": "hotspot",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "java/lang/ProcessBuilder/checkHandles/CheckHandles.java",
+    "PLATFORM": "all_windows",
+    "ISSUE_TRACKER": "https://github.com/adoptium/aqa-tests/issues/1920",
+    "ISSUE_TRACKER_STATUS": "closed"
+  },
+  {
+    "JDK_VERSION": "17",
+    "JDK_IMPL": "hotspot",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "java/foreign/TestNative.java",
+    "PLATFORM": "all",
+    "ISSUE_TRACKER": "https://github.com/adoptium/aqa-tests/issues/1920",
+    "ISSUE_TRACKER_STATUS": "closed"
+  },
+  {
+    "JDK_VERSION": "all",
+    "PLATFORM": "all",
+    "ISSUE_TRACKER": "https://github.com/eclipse-openj9/openj9/issues/8034",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "SyntheticGCWorkload_DoubleMap_J9",
+    "JDK_IMPL": "hotspot",
+    "ISSUE_TRACKER_STATUS": "closed"
+  },
+  {
+    "JDK_VERSION": "all",
+    "PLATFORM": "all",
+    "ISSUE_TRACKER": "https://bugs.openjdk.java.net/browse/JDK-8155588",
+    "TARGET": "jdk_custom",
+    "CUSTOM_TARGET": "dacapo-tomcat",
+    "JDK_IMPL": "hotspot",
+    "ISSUE_TRACKER_STATUS": "closed"
+  }
+]
